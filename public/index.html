@@ -1,12 +1,106 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Coming soon</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employee Kanban</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <h1>Coming soon</h1>
-  <p>This project is being built by the Hermes Dev Assistant.</p>
+  <header class="app-header">
+    <div class="header-inner">
+      <h1 class="app-title">Employee Kanban</h1>
+      <div class="header-actions">
+        <div class="filter-group">
+          <label for="filter-employee" class="visually-hidden">Filter by employee</label>
+          <select id="filter-employee" class="filter-select" aria-label="Filter by employee">
+            <option value="">All</option>
+            <option value="John Doe">John Doe</option>
+            <option value="Elias Hmede">Elias Hmede</option>
+            <option value="Samir">Samir</option>
+          </select>
+        </div>
+        <button id="btn-add-task" class="btn btn-primary" aria-haspopup="dialog">
+          + Add Task
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="board" role="main">
+    <section class="column" id="col-TODO" data-status="TODO" aria-label="TODO column">
+      <div class="column-header">
+        <span class="column-title">TODO</span>
+        <span class="column-count" id="count-TODO">0</span>
+      </div>
+      <div class="card-list" id="list-TODO" role="list" aria-label="TODO tasks"></div>
+    </section>
+
+    <section class="column" id="col-In-Progress" data-status="In-Progress" aria-label="In-Progress column">
+      <div class="column-header">
+        <span class="column-title">In-Progress</span>
+        <span class="column-count" id="count-In-Progress">0</span>
+      </div>
+      <div class="card-list" id="list-In-Progress" role="list" aria-label="In-Progress tasks"></div>
+    </section>
+
+    <section class="column" id="col-Ready" data-status="Ready" aria-label="Ready column">
+      <div class="column-header">
+        <span class="column-title">Ready</span>
+        <span class="column-count" id="count-Ready">0</span>
+      </div>
+      <div class="card-list" id="list-Ready" role="list" aria-label="Ready tasks"></div>
+    </section>
+  </main>
+
+  <!-- Add Task Modal -->
+  <div id="modal-overlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modal-title" class="modal-title">New Task</h2>
+        <button class="modal-close" id="btn-modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="task-form" novalidate>
+        <div class="form-group">
+          <label for="input-title" class="form-label">Title <span class="required" aria-hidden="true">*</span></label>
+          <input
+            type="text"
+            id="input-title"
+            class="form-input"
+            placeholder="Enter task title"
+            required
+            maxlength="100"
+            aria-required="true"
+          />
+          <span class="field-error" id="error-title" role="alert" hidden>Title is required.</span>
+        </div>
+        <div class="form-group">
+          <label for="input-description" class="form-label">Description <span class="optional">(optional)</span></label>
+          <textarea
+            id="input-description"
+            class="form-input form-textarea"
+            placeholder="Short description (max 200 chars)"
+            maxlength="200"
+            rows="3"
+          ></textarea>
+          <span class="char-count" id="char-count">0 / 200</span>
+        </div>
+        <div class="form-group">
+          <label for="input-employee" class="form-label">Assign to</label>
+          <select id="input-employee" class="form-input form-select" aria-label="Assign to employee">
+            <option value="John Doe">John Doe</option>
+            <option value="Elias Hmede">Elias Hmede</option>
+            <option value="Samir">Samir</option>
+          </select>
+        </div>
+        <div class="form-actions">
+          <button type="button" id="btn-cancel" class="btn btn-secondary">Cancel</button>
+          <button type="submit" id="btn-submit" class="btn btn-primary">Add Task</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
